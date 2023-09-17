@@ -1,8 +1,23 @@
-# React + Vite
+# Mesto-React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Интро**
 
-Currently, two official plugins are available:
+Данный проект представляет из себя мини-версию известной социальной сети.
+В рамках четвертого и следующих спринтов я буду работать над сервисом Mesto: интерактивной страницей, куда можно добавлять фотографии, удалять их и ставить лайки.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Функционал**
+---
+- Добавление / удаление карточек
+- Изменение информациии о себе
+- Редактирование аватара
+- Постановка / удаление лайков
+---
+
+## Используемые технологии:
+* React
+* JavaScript
+* Инструмент для сборки - Vite
+* HTML5
+* CSS3
+* [Ссылка на GitHub Pages](https://logowaz.github.io/mesto-react/)
+

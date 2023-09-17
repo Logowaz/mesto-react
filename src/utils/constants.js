@@ -34,12 +34,12 @@ export const validationConf = {
     errorClass: 'popup__error_visible'
   }; 
 
-export const configApi = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-73/cards',
-  headers: {
-  authorization: 'e01b1331-b93c-4514-b189-6f6d94874ecd',
-  "Content-Type": "application/json"
-  }
-};
+export const configApi = { 
+  url: 'https://mesto.nomoreparties.co/v1/cohort-73/', 
+  headers: { 
+  authorization: 'e01b1331-b93c-4514-b189-6f6d94874ecd', 
+  "Content-Type": "application/json" 
+  } 
+}
 
 // export {validationConf};

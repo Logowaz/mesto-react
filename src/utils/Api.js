@@ -1,4 +1,4 @@
-import {configApi} from "./constants"
+import {configApi} from "./constants.js"
 
 class Api {
     constructor(config) {
@@ -14,25 +14,23 @@ class Api {
     }
 
     getInitialCards() {
-        return fetch(this._url, {
-            headers: {
-            authorization: 'e01b1331-b93c-4514-b189-6f6d94874ecd'
-          }
+        return fetch(`${this._url}/cards`, {
+            headers: this._headers
         })
             .then(this.#onResponce)
     } 
 
     //Запросить информацию о пользователе с сервера
     getUserInfo() {
-        return fetch('https://nomoreparties.co/v1/cohort-73/users/me', {
-            headers: {authorization: 'e01b1331-b93c-4514-b189-6f6d94874ecd'}
+        return fetch(`${this._url}/users/me/`, {
+            headers: this._headers
         })
             .then(this.#onResponce)
     }
 
     //Добавить карточку на сервер
     addCard(data) {
-        return fetch(this._url, {
+        return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify(data)
@@ -43,7 +41,7 @@ class Api {
     //Записать обновленную информацию о пользователе на сервер
     setUserInfo(data) {
         console.log(data)
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-73/users/me/', {
+        return fetch(`${this._url}/users/me/`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -56,7 +54,7 @@ class Api {
 
     //Записать обновленный аватар пользователя на сервер
     setAvatar(data) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-73/users/me/avatar', {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -67,7 +65,7 @@ class Api {
 
     //Запрос на удаление карточки с сервера
     deleteCard(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-73/cards/${cardId}`, {
+        return fetch(`${this._url}/cards/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
             })
@@ -76,7 +74,7 @@ class Api {
 
     //Отправка запроса на присвоение лайка
     setLike(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-73/cards/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: this._headers
         })
@@ -85,7 +83,7 @@ class Api {
 
     // Отправка запроса на удаление лайка
     removeLike(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-73/cards/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this._headers
         })
