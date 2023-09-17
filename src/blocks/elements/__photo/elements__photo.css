@@ -1,0 +1,16 @@
+.elements__photo {
+  display: block;
+  width: 282px;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+  
+/* @media screen and (max-width: 620px) {
+    .elements__photo {
+      max-width: 370px;
+      width: 100%;
+    }
+} */

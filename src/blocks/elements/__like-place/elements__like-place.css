@@ -1,0 +1,5 @@
+.elements__like-place {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

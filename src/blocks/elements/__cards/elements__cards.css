@@ -1,0 +1,24 @@
+.elements__cards {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    display: grid;
+    gap: 20px 17px;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+}
+  
+@media screen and (max-width: 900px) {
+  .elements__cards {
+    max-width: 600px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+
+  }
+}
+  
+@media screen and (max-width: 620px) {
+  .elements__cards {
+    grid-template-columns: 1fr;
+  }
+}

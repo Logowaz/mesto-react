@@ -1,0 +1,10 @@
+.popup_opened {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  visibility: visible;
+  opacity: 1;
+  /* transition: visibility 0s, opacity .35s linear; */
+  pointer-events: all;
+  z-index: 3;
+}
