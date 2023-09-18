@@ -11,7 +11,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isConfirmAvatarPopupOpen, setIsConfirmAvatarPopupOpen] = React.useState(false);
+  const [isConfirmDeletePopupOpen, setisConfirmDeletePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
@@ -32,7 +32,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsConfirmAvatarPopupOpen(false);
+    setisConfirmDeletePopupOpen(false);
 
     setIsImagePopupOpen(false);
   }
@@ -160,7 +160,7 @@ function App() {
         name="confirm"
         title="Вы уверены?"
         buttonText="Да"
-        isOpen={isConfirmAvatarPopupOpen}
+        isOpen={isConfirmDeletePopupOpen}
         onClose={closeAllPopups}
       >
       </PopupWithForm>

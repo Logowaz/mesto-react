@@ -1,9 +1,9 @@
 import {configApi} from "./constants.js"
 
 class Api {
-    constructor(config) {
-      this._url = config.url,
-      this._headers = config.headers;
+    constructor({headers, url}) {
+      this._url = url,
+      this._headers = headers;
     }
 
     #onResponce(res) {
