@@ -40,7 +40,7 @@ class Api {
 
     //Записать обновленную информацию о пользователе на сервер
     setUserInfo(data) {
-        console.log(data)
+        // console.log(data)
         return fetch(`${this._url}/users/me/`, {
             method: 'PATCH',
             headers: this._headers,

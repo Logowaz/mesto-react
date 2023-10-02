@@ -5,10 +5,11 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from './ImagePopup';
-import PopupWithForm from './PopupWithForm';
 import ConfirmDeletePopup from './ConfirmDeletePopup.jsx';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
+import AddPlacePopup from './AddPlacePopup.jsx';
+
 
 
 
@@ -90,10 +91,9 @@ function App() {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    console.log(isLiked);
+
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      console.log(newCard);
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     })
     .catch((err) => {
@@ -132,6 +132,16 @@ function App() {
     });
   }
 
+  function handleAddPlaceSubmit(card) {
+    api.addCard(card).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -154,43 +164,12 @@ function App() {
         >
         </EditProfilePopup>
 
-        <PopupWithForm
-          name="addcard"
-          title="Новое место"
-          buttonText="Создать"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          onUpdateCards={handleAddPlaceSubmit}
         >
-          <input 
-            id="input-cardname" 
-            type="text" 
-            placeholder="Название" 
-            name="name" 
-            className="form__item form__item_type_place-name" 
-            minLength={2}
-            maxLength={30}
-            required
-          />
-
-          <span 
-            id="input-cardname-error" 
-            className="popup__error">
-          </span>
-
-          <input 
-            id="input-link" 
-            type="url" 
-            placeholder="Ссылка на картинку" 
-            name="link" 
-            className="form__item form__item_type_link" 
-            required
-          />
-
-          <span 
-            id="input-link-error" 
-            className="popup__error"></span>
-
-        </PopupWithForm>
+        </AddPlacePopup>
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
@@ -205,7 +184,7 @@ function App() {
           onSubmitConfirmDelete={handleCardDelete}
         >
         </ConfirmDeletePopup>
-        
+
         <ImagePopup
           card={selectedCard}
           isOpen={isImagePopupOpen}
