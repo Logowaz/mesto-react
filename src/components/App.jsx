@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
-import React from "react";
+import React, { useState, useEffect } from 'react'
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import api from "../utils/Api.js";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 import ConfirmDeletePopup from './ConfirmDeletePopup.jsx';
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import api from "../utils/Api.js";
+import EditProfilePopup from './EditProfilePopup.jsx';
+
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
   
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     api.getUserInfo()
       .then((userData) => {
         setCurrentUser(userData);
@@ -32,7 +33,7 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     api.getInitialCards()
       .then((cards) => {
         setCards(cards);
@@ -108,6 +109,17 @@ function App() {
     });
   }
 
+  function handleUpdateUser(value) {
+    api.setUserInfo(value)
+    .then((res) => {
+      setCurrentUser(res);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -123,47 +135,12 @@ function App() {
         />
         <Footer />
 
-        <PopupWithForm
-          name="editprofile"
-          title="Редактировать профиль"
-          buttonText="Сохранить"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
         >
-        
-          <input 
-            id="input-name"
-            type="text" 
-            placeholder="Имя" 
-            name="name" 
-            className="form__item form__item_type_name" 
-            minLength={2} 
-            maxLength={40}
-            required
-          />
-
-          <span 
-            id="input-name-error" 
-            className="popup__error">
-          </span>
-
-          <input 
-            id="input-job" 
-            type="text" 
-            placeholder="О себе" 
-            name="job" 
-            className="form__item form__item_type_job" 
-            minLength={2} 
-            maxLength={200}
-            required
-          />
-
-          <span 
-            id="input-job-error" 
-            className="popup__error">
-          </span>
-        
-        </PopupWithForm>
+        </EditProfilePopup>
 
         <PopupWithForm
           name="addcard"

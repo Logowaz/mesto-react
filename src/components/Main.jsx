@@ -15,7 +15,7 @@ function Main({
 
   const currentUser = useContext(CurrentUserContext);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <main className="content">
