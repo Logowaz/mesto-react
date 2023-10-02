@@ -8,6 +8,8 @@ import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 import ConfirmDeletePopup from './ConfirmDeletePopup.jsx';
 import EditProfilePopup from './EditProfilePopup.jsx';
+import EditAvatarPopup from './EditAvatarPopup.jsx';
+
 
 
 function App() {
@@ -120,6 +122,16 @@ function App() {
     });
   }
 
+  function handleUpdateAvatar(card) {
+    api.setAvatar(card).then((res) => {
+      setCurrentUser(res);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -180,28 +192,12 @@ function App() {
 
         </PopupWithForm>
 
-        <PopupWithForm
-          name="avatar"
-          title="Обновить аватар"
-          buttonText="Сохранить"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
         >
-          <input 
-            id="input-link-avatar" 
-            type="url" 
-            name="link" 
-            placeholder="Ссылка на картинку" 
-            className="form__item form__item_avatar_link" 
-            required
-          />
-
-          <span 
-            id="input-link-avatar-error" 
-            className="popup__error">
-          </span>
-
-        </PopupWithForm>
+        </EditAvatarPopup>
 
         <ConfirmDeletePopup
           isOpen={isConfirmDeletePopupOpen}
@@ -209,6 +205,7 @@ function App() {
           onSubmitConfirmDelete={handleCardDelete}
         >
         </ConfirmDeletePopup>
+        
         <ImagePopup
           card={selectedCard}
           isOpen={isImagePopupOpen}
