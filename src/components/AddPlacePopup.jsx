@@ -1,15 +1,29 @@
-import React, { useRef } from "react";
+import React, { useContext, useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
-    const cardNameRef = useRef();
-    const cardLinkRef = useRef();
+    
+    const [name, setName] = useState("");
+    const [link, setLink] = useState("");
+
+    function handleChangeName(evt) {
+        setName(evt.target.value);
+    }
+
+    function handleChangeLink(evt) {
+        setLink(evt.target.value);
+    }
+
+    React.useEffect(() => {
+        setName("");
+        setLink("");
+    }, [isOpen]);
 
     function handleAddPlaceSubmit(evt) {
         evt.preventDefault();
         onUpdateCards({
-            name: cardNameRef.current.value,
-            link: cardLinkRef.current.value,
+            name: name,
+            link: link,
         });
     }
 
@@ -31,7 +45,8 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
                 minLength={2}
                 maxLength={30}
                 required
-                ref={cardNameRef}
+                onChange={handleChangeName}
+                value={name || ""}
             />
 
             <span 
@@ -46,7 +61,8 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
                 name="link" 
                 className="form__item form__item_type_link" 
                 required
-                ref={cardLinkRef}
+                onChange={handleChangeLink}
+                value={link || ""}
             />
 
             <span 
